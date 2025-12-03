@@ -1,4 +1,4 @@
-module github.com/hacdias/webdav/v5
+module github.com/yeying-community/webdav
 
 go 1.25.0
 

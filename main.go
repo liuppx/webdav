@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/hacdias/webdav/v5/cmd"
+	"github.com/yeying-community/webdav/cmd"
 )
 
 func main() {
