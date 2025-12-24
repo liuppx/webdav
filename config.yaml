@@ -1,0 +1,66 @@
+# Development Configuration
+
+server:
+  address: "127.0.0.1"
+  port: 6065
+  tls: false
+  read_timeout: 30s
+  write_timeout: 30s
+  idle_timeout: 60s
+  shutdown_timeout: 5s
+
+webdav:
+  prefix: "/"
+  directory: "./test_data"
+  no_sniff: true
+  permissions: "CRUD"
+
+web3:
+  enabled: true
+  jwt_secret: "dev-secret-key-change-in-production-min-32-chars"
+  token_expiration: 24h
+
+security:
+  no_password: false
+  behind_proxy: false
+
+cors:
+  enabled: true
+  credentials: true
+  allowed_origins:
+    - "*"
+  allowed_methods:
+    - "GET"
+    - "POST"
+    - "PUT"
+    - "DELETE"
+    - "OPTIONS"
+    - "PROPFIND"
+    - "PROPPATCH"
+    - "MKCOL"
+    - "COPY"
+    - "MOVE"
+  allowed_headers:
+    - "*"
+  exposed_headers:
+    - "*"
+
+log:
+  level: "debug"
+  format: "console"
+  colors: true
+  outputs:
+    - "stderr"
+
+users:
+  - username: "dev"
+    password: "dev"
+    directory: "dev"
+    permissions: "CRUD"
+
+  - username: "test"
+    password: "test"
+    wallet_address: "0x21b3ee0d9540d5fe07bcbee7c056ca35fffdcaec"
+    directory: "test"
+    permissions: "CRUD"
+

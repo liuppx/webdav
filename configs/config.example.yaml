@@ -1,0 +1,107 @@
+# WebDAV Server Configuration Example
+
+# Server Configuration
+server:
+  address: "0.0.0.0"
+  port: 6065
+  tls: false
+  cert_file: ""
+  key_file: ""
+  read_timeout: 30s
+  write_timeout: 30s
+  idle_timeout: 60s
+  shutdown_timeout: 10s
+
+# WebDAV Configuration
+webdav:
+  prefix: "/"
+  directory: "/data"
+  no_sniff: true
+  permissions: "R"  # Default permissions: C=Create, R=Read, U=Update, D=Delete
+
+# Web3 Authentication Configuration
+web3:
+  enabled: true
+  jwt_secret: "your-super-secret-jwt-key-at-least-32-characters-long"
+  token_expiration: 24h
+
+# Security Configuration
+security:
+  no_password: false
+  behind_proxy: false
+
+# CORS Configuration
+cors:
+  enabled: true
+  credentials: true
+  allowed_origins:
+    - "http://localhost:3000"
+    - "https://your-domain.com"
+  allowed_methods:
+    - "GET"
+    - "POST"
+    - "PUT"
+    - "DELETE"
+    - "OPTIONS"
+    - "PROPFIND"
+    - "PROPPATCH"
+    - "MKCOL"
+    - "COPY"
+    - "MOVE"
+  allowed_headers:
+    - "Authorization"
+    - "Content-Type"
+    - "Depth"
+    - "Destination"
+    - "Overwrite"
+  exposed_headers:
+    - "Content-Length"
+    - "Content-Type"
+
+# Log Configuration
+log:
+  level: "info"  # debug, info, warn, error
+  format: "console"  # console, json
+  colors: true
+  outputs:
+    - "stderr"
+
+# Users Configuration
+users:
+  # User with password authentication
+  - username: "alice"
+    password: "password123"  # Will be hashed automatically
+    directory: "alice"
+    permissions: "CRUD"
+    rules:
+      - path: "/private"
+        permissions: "R"
+        regex: false
+
+  # User with Web3 authentication
+  - username: "bob"
+    wallet_address: "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb"
+    directory: "bob"
+    permissions: "CRUD"
+
+  # User with both authentication methods
+  - username: "charlie"
+    password: "password456"
+    wallet_address: "0x1234567890123456789012345678901234567890"
+    directory: "charlie"
+    permissions: "RU"
+    rules:
+      - path: "/shared"
+        permissions: "CRUD"
+        regex: false
+      - path: "/readonly"
+        permissions: "R"
+        regex: false
+
+  # Admin user with full permissions
+  - username: "admin"
+    password: "admin123"
+    wallet_address: "0xabcdefabcdefabcdefabcdefabcdefabcdefabcd"
+    directory: ""  # Root directory
+    permissions: "CRUD"
+
